@@ -4,16 +4,23 @@
   "description": "E-commerce for a Brazilian Store",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev"
+    "dev": "npm run services:up && next dev",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "services:up": "docker compose -f infra/compose.yaml up -d",
+    "services:stop": "docker compose -f infra/compose.yaml stop",
+    "services:down": "docker compose -f infra/compose.yaml down"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "next": "^14.2.5",
+    "pg": "^8.11.3",
     "react": "^18.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "jest": "^29.7.0",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6"
   }
