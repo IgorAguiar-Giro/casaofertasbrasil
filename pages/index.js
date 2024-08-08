@@ -1,7 +1,18 @@
+import Header from "components/Header/Header";
+
 export default function Home() {
   return (
-    <h1 className="bg-red-500 text-blue-500 text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+      <Header />
+
+      <script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+      ></script>
+      <script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+      ></script>
+    </>
   );
 }
