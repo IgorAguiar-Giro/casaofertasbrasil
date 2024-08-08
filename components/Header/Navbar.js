@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Navbar() {
   const Links = [
-    { name: "Entrar", link: "/" },
+    { name: "Entrar", link: "/login" },
     { name: "Favoritos", link: "/" },
     { name: "Carrinho", link: "/" },
   ];
