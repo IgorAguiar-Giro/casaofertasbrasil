@@ -1,13 +1,29 @@
 import React, { useState } from "react";
+import { useAuth } from "components/users/AuthContext";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
-  const Links = [
-    { name: "Entrar", link: "/login" },
-    { name: "Favoritos", link: "/" },
-    { name: "Carrinho", link: "/" },
-  ];
-
+  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/"); // Redireciona para a página inicial após o logout
+  };
+
+  const Links = user
+    ? [
+        { name: `Bem-vindo(a), ${user.username}`, link: "#" }, // Saudação
+        { name: "Favoritos", link: "/" },
+        { name: "Carrinho", link: "/" },
+        { name: "Sair", link: "#", onClick: handleLogout }, // Botão de Logout
+      ]
+    : [
+        { name: "Entrar", link: "/login" },
+        { name: "Favoritos", link: "/" },
+        { name: "Carrinho", link: "/" },
+      ];
 
   return (
     <>
@@ -36,7 +52,13 @@ export default function Navbar() {
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 p-4 md:p-0">
             {Links.map((link) => (
               <li key={link.name}>
-                <a href={link.link}>{link.name}</a>
+                <a
+                  href={link.link}
+                  onClick={link.onClick}
+                  className={link.onClick ? "cursor-pointer" : ""}
+                >
+                  {link.name}
+                </a>
               </li>
             ))}
           </ul>
