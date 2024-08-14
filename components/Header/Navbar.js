@@ -1,29 +1,13 @@
 import React, { useState } from "react";
-import { useAuth } from "components/users/AuthContext";
-import { useRouter } from "next/router";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
-    router.push("/"); // Redireciona para a página inicial após o logout
-  };
-
-  const Links = user
-    ? [
-        { name: `Bem-vindo(a), ${user.username}`, link: "#" }, // Saudação
-        { name: "Favoritos", link: "/" },
-        { name: "Carrinho", link: "/" },
-        { name: "Sair", link: "#", onClick: handleLogout }, // Botão de Logout
-      ]
-    : [
-        { name: "Entrar", link: "/login" },
-        { name: "Favoritos", link: "/" },
-        { name: "Carrinho", link: "/" },
-      ];
+  const Links = [
+    { name: "Entrar", link: "/login" },
+    { name: "Favoritos", link: "/" },
+    { name: "Carrinho", link: "/" },
+  ];
 
   return (
     <>

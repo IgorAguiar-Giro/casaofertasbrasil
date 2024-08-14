@@ -1,41 +1,6 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "components/users/AuthContext";
+import React from "react";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
-  const { login } = useAuth();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("/api/login", {
-        // Substitua pelo endpoint real
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        alert(error.message || "Falha no login");
-        return;
-      }
-
-      const userData = await response.json();
-      login(userData); // Definir o usuário no contexto
-      router.push("/"); // Redirecionar para a página inicial ou outra página
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      alert("Erro ao fazer login");
-    }
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="border-2 rounded-lg shadow-md p-6 bg-white w-full max-w-md">
