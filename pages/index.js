@@ -1,4 +1,4 @@
-import Header from "components/Header/Header";
+import Navbar from "components/Navbar";
 import React, { useEffect } from "react";
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Navbar />
     </>
   );
 }

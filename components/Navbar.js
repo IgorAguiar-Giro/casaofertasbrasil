@@ -1,18 +1,35 @@
+"use client";
+
 import React, { useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { user, error, isLoading } = useUser();
 
+  // Generate the Links array dynamically
   const Links = [
-    { name: "Entrar", link: "/login" },
     { name: "Favoritos", link: "/" },
     { name: "Carrinho", link: "/" },
+    ...(isLoading
+      ? [{ name: "Loading...", link: "#" }]
+      : error
+        ? [{ name: error.message, link: "#" }]
+        : user
+          ? [
+              {
+                name: `Welcome ${user.name}`,
+                link: "/user",
+              },
+              { name: "Logout", link: "/api/auth/logout" },
+            ]
+          : [{ name: "Entrar", link: "/api/auth/login" }]),
   ];
 
   return (
     <>
       <div className="flex justify-between items-center p-4 border-2 shadow-md">
-        <div className="md:text-2xl font-bold cursor-pointer" href="/">
+        <div className="md:text-2xl font-bold cursor-pointer">
           <ion-icon name="home-outline"></ion-icon>
           <p>Casa Ofertas Brasil</p>
         </div>
@@ -36,13 +53,7 @@ export default function Navbar() {
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 p-4 md:p-0">
             {Links.map((link) => (
               <li key={link.name}>
-                <a
-                  href={link.link}
-                  onClick={link.onClick}
-                  className={link.onClick ? "cursor-pointer" : ""}
-                >
-                  {link.name}
-                </a>
+                <a href={link.link}>{link.name}</a>
               </li>
             ))}
           </ul>

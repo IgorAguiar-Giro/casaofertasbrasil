@@ -14,11 +14,11 @@
     "migration:up": "node-pg-migrate -m infra/migrations --envPath .env.development up",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write ."
-    
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "next": "^14.2.5",
