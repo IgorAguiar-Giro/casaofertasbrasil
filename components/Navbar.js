@@ -12,9 +12,9 @@ export default function Navbar() {
     { name: "Favoritos", link: "/" },
     { name: "Carrinho", link: "/" },
     ...(isLoading
-      ? [{ name: "Loading...", link: "#" }]
+      ? [{ name: "Loading...", link: "/" }]
       : error
-        ? [{ name: error.message, link: "#" }]
+        ? [{ name: error.message, link: "/" }]
         : user
           ? [
               {
